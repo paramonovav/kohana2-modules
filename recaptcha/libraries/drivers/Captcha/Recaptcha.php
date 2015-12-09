@@ -20,6 +20,11 @@ class Captcha_Recaptcha_Driver extends Captcha_Driver {
     public function __construct()
     {
 		Captcha::$config = array_merge(Kohana::config('captcha/'.Captcha::$config['style']), Kohana::config('captcha.'.Captcha::$config['group']), Captcha::$config);
+
+		if (!empty($_POST) && !empty(Captcha::$config['field']) && !empty($_POST['g-recaptcha-response']))
+		{
+			$_POST[Captcha::$config['field']] = $_POST['g-recaptcha-response'];
+		}
     }
 
 	public function generate_challenge()
@@ -55,6 +60,11 @@ class Captcha_Recaptcha_Driver extends Captcha_Driver {
 	*/
 	public function valid($response)
 	{
+		if (empty($response))
+		{
+			return FALSE;
+		}
+
 		require_once Kohana::find_file('vendor', 'recaptchalib');
 
 		$reCaptcha = new ReCaptcha(Captcha::$config['privateKey']);
