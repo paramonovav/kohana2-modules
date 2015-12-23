@@ -110,4 +110,9 @@ $config['modules'] = array
 );
 ```
 
-4. This module provides several cache drivers: Memcached (need install php-memcached extension), Igbinaryfile (need install php-igbinary), Jsonfile, Msgpackfile (need install php-msgpack) and PHP (some reasons some times need for developers)
+4. This module provides several cache drivers: 
+    * Memcached (need install php-memcached extension). Config application/config/cache/memcached.php.
+    * Igbinaryfile (need install php-igbinary)
+    * Jsonfile
+    * Msgpackfile (need install php-msgpack)
+    * PHP (some reasons some times need for developers)
